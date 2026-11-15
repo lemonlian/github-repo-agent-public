@@ -1,0 +1,9 @@
+{
+  "owner": "your-org",
+  "naming_template": "<用途>-<形态>-<受众>",
+  "description_template": "这是什么｜给谁用｜什么状态",
+  "fork_policy": "保留原名 + 三段式描述写明上游 + topics 标 fork/third-party",
+  "tag_policy": "里程碑才打，须配 GitHub Release + README 版本索引",
+  "push_policy": "本地一改即推；推前四查；推后校验远端 HEAD",
+  "forbidden": ["--force", "--no-verify", "把凭据写进文件", "擅自升版本号"]
+}
