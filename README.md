@@ -34,6 +34,11 @@
 
 ## 三、安装（从零到能跑）
 
+**完全没用过 GitHub？** 先读 [BEGINNER-GUIDE.md](BEGINNER-GUIDE.md)：从注册账号（建议 Gmail 当注册邮箱，注意 GitHub 不支持 Google 一键登录）→ 装 git → 装 gh → 设备码授权 → 建第一个仓库，每步都写清「看到什么算成功」，照抄 20 分钟走完。卡住就跑 `python3 scripts/gh_repo_guard.py onboard`，缺哪步它给哪步的命令。
+
+**有基础的老手**走速通版：
+
+
 ```bash
 # 1. 装 gh（macOS）
 brew install gh
@@ -60,10 +65,11 @@ python3 scripts/gh_repo_guard.py status
 ln -s "$(pwd)" ~/.workbuddy/skills/github-repo-agent-public
 ```
 
-## 四、五个命令能干什么
+## 四、六个命令能干什么
 
 | 命令 | 作用 | 会不会改线上 |
 |---|---|---|
+| `onboard` | 零基础环境自检：git / gh / 授权，缺哪步给哪步命令 | 只读 |
 | `check` | 查 gh 授权、https 通道 | 只读 |
 | `status` | 盘点全部仓（含 Private）、检查三段式描述与 topics | 只读 |
 | `preflight <路径>` | 推前四查：通道 / 工作区 / 密钥 / 远端 HEAD 是否可快进 | 只读 |
@@ -88,6 +94,7 @@ ln -s "$(pwd)" ~/.workbuddy/skills/github-repo-agent-public
 
 | tag | 日期 | commit | 一句话改动 |
 |---|---|---|---|
+| v1.2.0 | 2026-11-15 | 本次提交 | 零基础友好：新增 onboard 环境自检命令 + BEGINNER-GUIDE.md 手册 + 授权分两档（默认最小权限，删库进阶档） |
 | v1.1.0 | 2026-11-15 | 7f205e1 | 对标学习增强：Examples 触发例句、渐进披露层 references、Keep a Changelog 声明 |
 | v1.0.0 | 2026-11-15 | `7b3ad88` | 建立自研编排层、凭据零落盘、五个治理命令、README 与回退章节 |
 
@@ -139,5 +146,6 @@ scripts/gh_repo_guard.py    五个命令的可跑实现
 config/policy.example.json          策略配置（示例，复制成 policy.json 后自己填）
 examples/usage.md           典型用法与 FAIL 处理表
 references/details.md       深入细节（FAIL 矩阵 / API 兜底 / 回退选择 / 发版纪律）
+BEGINNER-GUIDE.md           零基础手册（没用过 GitHub 也能 20 分钟跑通）
 ```
 

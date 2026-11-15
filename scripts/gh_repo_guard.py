@@ -71,6 +71,67 @@ def cmd_check(_):
     return 0 if ok else 1
 
 
+def cmd_onboard(_):
+    """零基础环境自检：git → gh → 授权 → 通道，缺哪步给哪步命令。"""
+    import platform
+    print('零基础环境自检（一共 4 步，缺哪步补哪步，别跳步）\n')
+    ready = True
+
+    def step(no, name, ok, success_text, fail_help):
+        nonlocal ready
+        mark = 'PASS' if ok else 'FAIL'
+        print(f'第 {no} 步  {name}：[{mark}]')
+        if ok:
+            print(f'    {success_text}')
+        else:
+            ready = False
+            print(f'    {fail_help}')
+        print()
+
+    g = run(['git', '--version'], check=False)
+    step(1, '装好 git',
+         g.returncode == 0, g.stdout.strip(),
+         '复制运行：\n    macOS:   xcode-select --install   （弹窗点"安装"，约 5 分钟）\n'
+         '             macOS 也可: brew install git\n'
+         '    Windows: 去 https://git-scm.com/download/win 下载，一路点下一步\n'
+         '    装完关掉终端重新打开，再跑一次本命令验证。')
+
+    h = run(['gh', '--version'], check=False)
+    step(2, '装好 GitHub 官方命令行 gh',
+         h.returncode == 0, h.stdout.strip().splitlines()[0] if h.stdout else 'gh 可用',
+         '复制运行：\n    macOS:   brew install gh\n'
+         '    Windows: winget install --id GitHub.cli\n'
+         '    装完关掉终端重新打开，再跑一次本命令验证。')
+
+    a = run(['gh', 'auth', 'status'], check=False)
+    atext = (a.stdout or '') + (a.stderr or '')
+    logged = 'Logged in to github.com' in atext
+    step(3, 'gh 已连上你的 GitHub 账号',
+         logged, '已登录：' + (' '.join([l.strip() for l in atext.splitlines() if 'account' in l.lower()][:1]) or '当前账号'),
+         '还没有 GitHub 账号？先去 https://github.com/signup 注册（建议用 Gmail 当注册邮箱，'
+         '一个邮箱通吃 GitHub / ChatGPT / Gemini；注意 GitHub 不支持 Google 一键登录，密码自己记好）。\n'
+         '    注册完复制运行：\n    gh auth login --web --git-protocol https --skip-ssh-key\n'
+         '    终端会给一串形如 XXXX-XXXX 的码，浏览器打开 https://github.com/login/device 填进去点确认。\n'
+         '    码只有 15 分钟有效，过期就重跑一次这条命令拿新码。\n'
+         '    （默认权限已够日常管理；要删仓库这类动作，用进阶档：\n'
+         '     gh auth login --web --git-protocol https --skip-ssh-key --scopes "repo,read:org,gist,workflow,delete_repo"\n'
+         '     进阶档能删库，删除前守卫必须先备份 + 你确认，别默认就开。）')
+
+    https = 'https' in atext.lower()
+    step(4, '传输通道走 https（不配 SSH）',
+         https or not logged,
+         '通道正常' if https else '（未登录时跳过，完成第 3 步后这里会自动正常）',
+         '复制运行：gh auth setup-git')
+
+    if ready:
+        print('环境就绪！接下来：')
+        print('  python3 scripts/gh_repo_guard.py status    ← 盘一遍你的仓库')
+        print('  还没有仓库？跑 status 后按 BEGINNER-GUIDE.md 第 5 步建第一个。')
+        return 0
+    print('上面有 FAIL 就按提示补，补完重跑：python3 scripts/gh_repo_guard.py onboard')
+    return 1
+
+
 def cmd_status(args):
     repos = repos_all()
     if len(repos) == 100:
@@ -170,6 +231,7 @@ def cmd_release(args):
 def main():
     ap = argparse.ArgumentParser(description='GitHub 仓库治理守卫（凭据零落盘）')
     sub = ap.add_subparsers(dest='cmd', required=True)
+    sub.add_parser('onboard', help='零基础环境自检：git/gh/授权，缺哪步给哪步命令').set_defaults(func=cmd_onboard)
     sub.add_parser('check', help='检查 gh 授权与 https 通道').set_defaults(func=cmd_check)
     sub.add_parser('status', help='盘点全部仓（含 Private）与规范达标情况').set_defaults(func=cmd_status)
     p = sub.add_parser('preflight', help='推送前四查')

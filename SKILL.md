@@ -8,6 +8,7 @@ description: |
     - "看看哪些仓缺 Release，帮我补上"
     - "帮我发个版本 v1.1.0"
     - "GitHub 仓库整理：名字、描述、topics 都过一遍"
+    - "我是新手，从零开始帮我弄好 GitHub 环境"
 agent_created: true
 ---
 
@@ -37,13 +38,14 @@ agent_created: true
 
 | 想做什么 | 命令 |
 |---|---|
+| 零基础环境自检（缺哪步给哪步命令） | `python3 scripts/gh_repo_guard.py onboard` |
 | 检查授权与通道 | `python3 scripts/gh_repo_guard.py check` |
 | 盘点全部仓 + 规范达标 | `python3 scripts/gh_repo_guard.py status` |
 | 推前四查 | `python3 scripts/gh_repo_guard.py preflight <本地仓路径>` |
 | 查 tag / Release 缺口 | `python3 scripts/gh_repo_guard.py audit` |
 | 发里程碑版本 | `python3 scripts/gh_repo_guard.py release <路径> --tag vX.Y.Z --notes "..." --confirm` |
 
-`release` 不加 `--confirm` 会拒绝执行，这是故意的。
+`release` 不加 `--confirm` 会拒绝执行，这是故意的。面向完全没用过 GitHub 的用户，引导走 `BEGINNER-GUIDE.md` 与 `onboard`：先注册（建议 Gmail 当注册邮箱）、再装 git / gh、再设备码授权；授权默认最小权限档，删除类进阶档单独升，不默认给小白开 `delete_repo`。
 
 ## 深入细节（渐进披露）
 
