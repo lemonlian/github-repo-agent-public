@@ -45,7 +45,7 @@ agent_created: true
 | 查 tag / Release 缺口 | `python3 scripts/gh_repo_guard.py audit` |
 | 发里程碑版本 | `python3 scripts/gh_repo_guard.py release <路径> --tag vX.Y.Z --notes "..." --confirm` |
 
-`release` 不加 `--confirm` 会拒绝执行，这是故意的。面向完全没用过 GitHub 的用户，引导走 `BEGINNER-GUIDE.md` 与 `onboard`：先注册（建议 Gmail 当注册邮箱）、再装 git / gh、再设备码授权。**授权默认管理档**（含 `delete_repo`，建改删一次到位，定位是完整仓库治理）；确定不要删库能力的用户可退日常档。删除护栏不随档位放开：列清单、备份、亲口确认。
+`release` 不加 `--confirm` 会拒绝执行，这是故意的。面向完全没用过 GitHub 的用户，引导走 `BEGINNER-GUIDE.md` 与 `onboard`：先注册（建议 Gmail 当注册邮箱）、再装 git / gh、再设备码授权。**授权默认全权限档**（21 项 scope 一次拉满：repo、workflow、delete_repo、组织三级、gist、通知、用户资料、包三级、讨论读写、公钥与 GPG 三级——定位是「用户不会用也没关系，数字人全权验证与管理，用户未来在过程中学会」）；确定不需要部分能力的用户可自行降档。删除护栏不随档位放开：列清单、备份、亲口确认。
 
 ## 深入细节（渐进披露）
 
