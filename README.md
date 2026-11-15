@@ -88,6 +88,7 @@ ln -s "$(pwd)" ~/.workbuddy/skills/github-repo-agent-public
 
 | tag | 日期 | commit | 一句话改动 |
 |---|---|---|---|
+| v1.1.0 | 2026-11-15 | 本次提交 | 对标学习增强：Examples 触发例句、渐进披露层 references、Keep a Changelog 声明 |
 | v1.0.0 | 2026-11-15 | `7b3ad88` | 建立自研编排层、凭据零落盘、五个治理命令、README 与回退章节 |
 
 ```bash
@@ -137,5 +138,6 @@ LICENSE                     协议
 scripts/gh_repo_guard.py    五个命令的可跑实现
 config/policy.example.json          策略配置（示例，复制成 policy.json 后自己填）
 examples/usage.md           典型用法与 FAIL 处理表
+references/details.md       深入细节（FAIL 矩阵 / API 兜底 / 回退选择 / 发版纪律）
 ```
 

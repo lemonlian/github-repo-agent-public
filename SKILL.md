@@ -1,6 +1,13 @@
 ---
 name: github-repo-agent-public
-description: 通用版 GitHub 仓库治理 Agent。把「什么时候推、推之前查什么、怎么退回去」固化成可跑的守卫，覆盖仓情盘点、命名与描述规范、推送前四查、tag/Release 历史版本与回退。只调官方 gh CLI 与 REST API，凭据零落盘。触发词：「盘一下我的仓库」「推之前帮我查一下」「看看哪些仓缺 Release」「帮我发个版本」「GitHub 仓库整理」。
+description: |
+  通用版 GitHub 仓库治理 Agent。把「什么时候推、推之前查什么、怎么退回去」固化成可跑的守卫，覆盖仓情盘点、命名与描述规范、推送前四查、tag/Release 历史版本与回退。只调官方 gh CLI 与 REST API，凭据零落盘。
+  Examples:
+    - "盘一下我的仓库，看看哪些描述还没写成三段式"
+    - "我改完代码了，推之前帮我查一下"
+    - "看看哪些仓缺 Release，帮我补上"
+    - "帮我发个版本 v1.1.0"
+    - "GitHub 仓库整理：名字、描述、topics 都过一遍"
 agent_created: true
 ---
 
@@ -37,6 +44,10 @@ agent_created: true
 | 发里程碑版本 | `python3 scripts/gh_repo_guard.py release <路径> --tag vX.Y.Z --notes "..." --confirm` |
 
 `release` 不加 `--confirm` 会拒绝执行，这是故意的。
+
+## 深入细节（渐进披露）
+
+本文件只保留判断与铁律。详细的命令输出解读、FAIL 处理矩阵、Git Data API 兜底步骤、回退方案选择，都在 `references/details.md` —— 当上表命令的输出你不知道怎么处理时，去读那个文件。
 
 ## 三层结构（为什么这不只是套壳）
 
