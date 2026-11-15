@@ -12,10 +12,10 @@
 
 ## v1.3.0（2026-11-15）
 
-授权默认档翻转：日常档 → 管理档（账号主人拍板）。
+授权默认档翻转：日常档 → 管理档。
 
 | 改动 | 为什么 | 影响文件 |
 |---|---|---|
-| 默认授权改为管理档（含 delete_repo，一次到位） | 定位是完整仓库治理 / 冷库管理：建、改、删都要有，不给「先半授权、要删再升级」的两段体验 | `scripts/gh_repo_guard.py`、`README.md`、`QUICKSTART.md`、`BEGINNER-GUIDE.md`、`SKILL.md` |
+| 默认授权改为管理档（含 delete_repo，一次到位） | 定位是完整仓库治理：建、改、删都要有，不给「先半授权、要删再升级」的两段体验 | `scripts/gh_repo_guard.py`、`README.md`、`QUICKSTART.md`、`BEGINNER-GUIDE.md`、`SKILL.md` |
 | 删除护栏不随档位放开 | 能力给足 ≠ 风险放开：删前列清单 + tarball 备份 + 亲口确认，永远保留 | `SKILL.md`、`BEGINNER-GUIDE.md` |
 | 原「进阶」章节改为「降级」章节 | 方向反转：管理档是默认，不要删库才降日常档 | `BEGINNER-GUIDE.md` |
