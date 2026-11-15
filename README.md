@@ -94,7 +94,7 @@ ln -s "$(pwd)" ~/.workbuddy/skills/github-repo-agent-public
 
 | tag | 日期 | commit | 一句话改动 |
 |---|---|---|---|
-| v1.2.0 | 2026-11-15 | 本次提交 | 零基础友好：新增 onboard 环境自检命令 + BEGINNER-GUIDE.md 手册 + 授权分两档（默认最小权限，删库进阶档） |
+| v1.2.0 | 2026-11-15 | 031af98 | 零基础友好：新增 onboard 环境自检命令 + BEGINNER-GUIDE.md 手册 + 授权分两档（默认最小权限，删库进阶档） |
 | v1.1.0 | 2026-11-15 | 7f205e1 | 对标学习增强：Examples 触发例句、渐进披露层 references、Keep a Changelog 声明 |
 | v1.0.0 | 2026-11-15 | `7b3ad88` | 建立自研编排层、凭据零落盘、五个治理命令、README 与回退章节 |
 
