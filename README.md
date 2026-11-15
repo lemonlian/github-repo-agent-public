@@ -45,7 +45,7 @@ brew install gh
 # 其他系统：https://cli.github.com
 
 # 2. 设备码授权，一串码，不碰密钥
-gh auth login --web --git-protocol https --skip-ssh-key
+gh auth login --web --git-protocol https --skip-ssh-key --scopes "repo,read:org,gist,workflow,delete_repo"
 gh auth setup-git
 
 # 3. 拿本仓
@@ -94,6 +94,7 @@ ln -s "$(pwd)" ~/.workbuddy/skills/github-repo-agent-public
 
 | tag | 日期 | commit | 一句话改动 |
 |---|---|---|---|
+| v1.3.0 | 2026-11-15 | 本次提交 | 授权默认档翻转为管理档（含 delete_repo，一次到位），删除护栏不变 |
 | v1.2.0 | 2026-11-15 | c47f62e | 零基础友好：新增 onboard 环境自检命令 + BEGINNER-GUIDE.md 手册 + 授权分两档（默认最小权限，删库进阶档） |
 | v1.1.0 | 2026-11-15 | 7f205e1 | 对标学习增强：Examples 触发例句、渐进披露层 references、Keep a Changelog 声明 |
 | v1.0.0 | 2026-11-15 | `7b3ad88` | 建立自研编排层、凭据零落盘、五个治理命令、README 与回退章节 |
@@ -124,7 +125,7 @@ gh release download v1.0.0 --repo lemonlian/github-repo-agent-public
 | 现象 | 先查这里 |
 |---|---|
 | `gh: command not found` | `brew install gh`；其他系统看 cli.github.com |
-| 提示未授权 | `gh auth login --web --git-protocol https --skip-ssh-key`，浏览器填设备码 |
+| 提示未授权 | 跑上面安装节的授权命令（管理档，含 `--scopes`），浏览器填设备码 |
 | 设备码过期 | 码只有 15 分钟有效，重跑登录命令拿新码 |
 | `status` 里仓库数比想象少 | 一定要用 `/user/repos`，`/users/<name>/repos` 只返回 public |
 | `preflight` 报「远端 HEAD 可快进」FAIL | 别的会话推过了：`git fetch` → `git pull --ff-only`，**不要 --force** |

@@ -54,7 +54,7 @@ gh 是 GitHub 官方命令行，数字人靠它帮你干活。
 在终端粘贴回车：
 
 ```bash
-gh auth login --web --git-protocol https --skip-ssh-key
+gh auth login --web --git-protocol https --skip-ssh-key --scopes "repo,read:org,gist,workflow,delete_repo"
 ```
 
 按提示选 `Login with a web browser`，终端会显示一串形如 `XXXX-XXXX` 的码：
@@ -65,8 +65,8 @@ gh auth login --web --git-protocol https --skip-ssh-key
 
 ⚠️ 码只有 **15 分钟**有效，过期了别慌，重跑一遍上面的命令拿新码就行。
 
-> **权限说明（重要）**：默认这一档权限就能建仓库、推代码、改描述、发版本——95% 的事都够用。
-> **不需要**为了「让 AI 更强」去开最高权限。将来真要让它帮你删废旧仓库，再升进阶档（见文末「进阶」），删除前它照样必须先备份、先问你。
+> **权限说明（重要）**：上面这条授权命令是**管理档**，一次到位——建仓、推代码、改描述、发版本、管理 topics 都行，**也包含删库能力**。给的是能力，不是风险：删除前数字人必须先列清单、先备份、先问你，这条护栏永远在。
+> 如果你确定自己永远不需要删库，可以把命令里的 `--scopes "..."` 参数整段去掉，退回日常档。
 
 最后跑一句：`gh auth setup-git`
 
@@ -124,12 +124,14 @@ git push origin main
 
 ---
 
-## 进阶：清理废旧仓库时才需要（可先跳过）
+## 降级：确定不要删库能力时才需要（可先跳过）
 
-日常用不到删除权限。哪天你的仓库多了、想清理空壳仓库，升级到进阶档：
+第 3 步给的是管理档（含删库）。如果你确定自己永远不需要删库，可以退回日常档：
 
 ```bash
-gh auth login --web --git-protocol https --skip-ssh-key --scopes "repo,read:org,gist,workflow,delete_repo"
+gh auth login --web --git-protocol https --skip-ssh-key
 ```
 
-这一档**能删库**。所以守卫的规矩更严：删除前列清单、先 `gh api repos/<owner>/<repo>/tarball` 备份、等你亲口确认才执行。不用了可以随时降回默认档（重跑默认授权命令即可）。
+日常档不能删库，其余管理能力（建仓、推送、改描述、发版本）都在。哪天又想要删库能力了，重跑第 3 步的管理档命令即可。
+
+无论哪一档，删除动作的铁律不变：先列清单 → `gh api repos/<owner>/<repo>/tarball` 备份 → 你亲口确认 → 才执行。

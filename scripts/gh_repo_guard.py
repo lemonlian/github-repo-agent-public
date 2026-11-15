@@ -110,12 +110,12 @@ def cmd_onboard(_):
          logged, '已登录：' + (' '.join([l.strip() for l in atext.splitlines() if 'account' in l.lower()][:1]) or '当前账号'),
          '还没有 GitHub 账号？先去 https://github.com/signup 注册（建议用 Gmail 当注册邮箱，'
          '一个邮箱通吃 GitHub / ChatGPT / Gemini；注意 GitHub 不支持 Google 一键登录，密码自己记好）。\n'
-         '    注册完复制运行：\n    gh auth login --web --git-protocol https --skip-ssh-key\n'
+         '    注册完复制运行（管理档，建改删全能力，一次到位）：\n'
+         '    gh auth login --web --git-protocol https --skip-ssh-key --scopes "repo,read:org,gist,workflow,delete_repo"\n'
          '    终端会给一串形如 XXXX-XXXX 的码，浏览器打开 https://github.com/login/device 填进去点确认。\n'
          '    码只有 15 分钟有效，过期就重跑一次这条命令拿新码。\n'
-         '    （默认权限已够日常管理；要删仓库这类动作，用进阶档：\n'
-         '     gh auth login --web --git-protocol https --skip-ssh-key --scopes "repo,read:org,gist,workflow,delete_repo"\n'
-         '     进阶档能删库，删除前守卫必须先备份 + 你确认，别默认就开。）')
+         '    （若确定不要删库能力，可去掉 --scopes 参数改用日常档；\n'
+         '     管理档能删库，但删除前守卫必须先备份 + 你亲口确认，这条护栏不随档位放开。）')
 
     https = 'https' in atext.lower()
     step(4, '传输通道走 https（不配 SSH）',

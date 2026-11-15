@@ -4,7 +4,7 @@
 
 ```bash
 brew install gh                      # macOS；其他系统见 https://cli.github.com
-gh auth login --web --git-protocol https --skip-ssh-key
+gh auth login --web --git-protocol https --skip-ssh-key --scopes "repo,read:org,gist,workflow,delete_repo"
 # 终端给一串形如 XXXX-XXXX 的码，浏览器打开 https://github.com/login/device 填进去
 gh auth setup-git                    # 让 git push 走 https
 ```
